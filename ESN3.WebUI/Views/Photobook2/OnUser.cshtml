@@ -1,0 +1,21 @@
+﻿@using ESN3.WebUI.HtmlHelpers
+@model ESN3.WebUI.Models.Photobook2ViewModel
+@{
+    ViewBag.Title = "OnUser";
+}
+
+<div class="row">
+    <div class="col-md-12 text-left">
+        @Html.Partial("_NavigationPhotobookSection")
+    </div>
+</div>
+
+<h2>Photobooks on @Model.Profile.fName</h2>
+
+<p>Have @Model.PagingInfo.TotalItems items</p>
+
+@Html.Partial("_Photobook2List", Model.Photobooks)
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("OnFriends", new { page = x, UserIdString = Model.Profile.ProfileId.ToString() }))
+</div>

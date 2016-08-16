@@ -1,0 +1,49 @@
+﻿@{
+    string controller = (string)ViewContext.Controller.ControllerContext.RouteData.Values["controller"];
+    //string login = ViewData.Model.User.login;
+    string login = null;
+}
+
+
+<ul class="lead nav nav-pills nav-stacked">
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+    <li class="@(login == User.Identity.Name.Split('|')[0] ? " active" : "")">
+        @Html.RouteLink("My Profile", new { Controller = "Profile", Action = "ShowOne", login = User.Identity.Name.Split('|')[0] })
+    </li>
+    }
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <li class="">
+            @Html.RouteLink("Create", new { Controller = "Profile", Action = "Create" })
+        </li>
+    }
+
+    <li class="@(ViewBag.NavSec == "Profiles" ? " active" : "")">
+        @Html.ActionLink("Profiles", "Index", "ProfilesList")
+    </li>
+@if (User.Identity.IsAuthenticated)
+{
+    <li class="@(ViewBag.NavSec == "Friends" ? " active" : "")">
+        @Html.RouteLink("Friends", new { Controller = "FriendsList", Action = "FriendsOfUser", login = User.Identity.Name.Split('|')[0], page = 1 })
+    </li>
+}
+    <li class="@(ViewBag.NavSec == "News" ? " active" : "")">
+        @Html.RouteLink("News", new { Controller = "News", Action = "AllNews", login = User.Identity.Name.Split('|')[0], page = 1 })
+    </li>
+@if (User.Identity.IsAuthenticated)
+{
+    <li class="@(controller == "Messages4" ? " active" : "")">
+        @Html.RouteLink("Messages4", new { Controller = "Messages4", Action = "Talks", login = User.Identity.Name.Split('|')[0] })
+    </li>
+
+    <li class="@(controller == "Messages5" ? " active" : "")">
+        @Html.RouteLink("Messages5", new { Controller = "Messages5", Action = "Talks", login = User.Identity.Name.Split('|')[0] })
+    </li>
+}
+    <li class="@(ViewBag.NavSec == "Photobook2" ? " active" : "")">
+        @Html.RouteLink("Photobook2", new { Controller = "Photobook2", Action = "All" })
+    </li>
+</ul>

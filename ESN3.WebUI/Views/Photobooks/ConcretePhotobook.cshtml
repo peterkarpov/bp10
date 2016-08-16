@@ -1,0 +1,23 @@
+﻿@model ESN3.WebUI.Models.PhotobooksViewModel
+@{
+    ViewBag.Title = "ConcretePhotobook";
+}
+
+<h2>ConcretePhotobook</h2>
+
+@*<p>autor: @Model.Profile.fName</p>*@
+<p>title: @Model.Photebook.Title</p>
+
+@foreach (var image in Model.Images)
+{
+    if (image.ImageData != null)
+    {
+        <div class="pull-left" style="margin-right: 10px">
+            <img class="img-thumbnail" width="75" height="75"
+                 src="@Url.Action("GetImage", "Image",
+                new { image.ImageId })" />
+        </div>
+    }
+}
+
+

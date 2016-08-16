@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+
+    <title>@ViewBag.Title</title>
+
+    @System.Web.Optimization.Styles.Render("~/Content/css/jqueryui")
+    @System.Web.Optimization.Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
+    @System.Web.Optimization.Scripts.Render("~/bundles/modernizr")
+
+
+
+</head>
+<body>
+
+
+    @Html.Partial("_HeaderSection")
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.Partial("_NavigationSection")
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="section section-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Footer header</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisici elit,
+                        <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                        <br>Ut enim ad minim veniam, quis nostrud
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-info text-right">
+                        <br>
+                        <br>
+                    </p>
+                    <div class="row">
+                        <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                            <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 hidden-xs text-right">
+                            <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    @*<div id="PopupWrapper"></div>*@
+
+    @*<script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+
+    
+
+    @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryui")
+    @System.Web.Optimization.Scripts.Render("~/bundles/bootstrap")
+    @System.Web.Optimization.Scripts.Render("~/bundles/common")
+
+    @System.Web.Optimization.Scripts.Render("~/Scripts/bootstrap-tooltip")
+    @System.Web.Optimization.Scripts.Render("~/Scripts/bootstrap-typeahead")
+    
+    @System.Web.Optimization.Scripts.Render("~/Scripts/jquery.unobtrusive-ajax")
+
+    <script>
+        
+    </script>
+
+    @RenderSection("scripts", required: false)
+
+    
+
+    @*<script src="~/Scripts/_references.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/common.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.intellisense.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.intellisense.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.slim.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.slim.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.1.custom.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/knockout-2.0.0.debug.js"></script>
+    <script src="~/Scripts/knockout-2.0.0.js"></script>
+    <script src="~/Scripts/modernizr-2.0.6-development-only.js"></script>*@
+
+    <!-- Modal -->
+    @*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Название модали</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("Ajax", "Authentication")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿@using ESN3.WebUI.HtmlHelpers
+@model ESN3.WebUI.Models.Photobook2ViewModel
+@{
+    ViewBag.Title = "OnePhotobook";
+}
+
+<div class="row">
+    <div class="col-md-12 text-left">
+        @Html.Partial("_NavigationPhotobookSection")
+    </div>
+</div>
+
+<h2>Photobook Title: @Model.Photobooks.First().Title</h2>
+
+<p>Autor this Photobook: @Model.Profile.fName</p>
+
+<form method="get" action="">
+    <input type="hidden" value="@Model.Photobooks.First().PhotobookId" name="PhotobookId" />
+    <input type="text" name="searchByFileName" />
+    <input type="submit" name="search" value="searchByFileName" />
+</form>
+
+@Html.Partial("_Photobook2One", Model.Images)
+
+<div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Have @ViewBag.TotalItems images</h1>
+        </div>
+    </div>
+
+@Html.Partial("_PhotobookGallery", Model.Images)
+
+@Html.ActionLink("Add Image On Photobook", "AddImageOnPhotobook", new { PhotobookId = Model.Photobooks.First().PhotobookId })
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("OnePhotobook", new { page = x, PhotobookId = Model.Photobooks.First().PhotobookId }))
+</div>

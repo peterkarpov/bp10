@@ -1,0 +1,69 @@
+﻿@model ESN3.WebUI.Models.MessagesViewModel
+@{
+    ViewBag.Title = "Talks";
+}
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Heading</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            @foreach (var item in Model.Talks)
+            {
+                <ul class="media-list">
+                    <li class="media">
+
+                        @using (Html.BeginForm("Talk", "Messages"))
+                        {
+                            @Html.Hidden("Talk", Model.Talks)
+                            <input class="btn btn-sm btn-warning"
+                                   type="submit" value="Открыть" />
+                        }
+                        <div class="pull-left"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></div>
+                        <div class="media-body">
+                            <h4 class="media-heading">@item.to.fName</h4>
+                            <p>
+                                @item.Messages.Last().MessageId.ToString()
+                            </p>
+                        </div>
+
+                    </li>
+
+
+                </ul>
+            }
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <ul class="pagination">
+                <li>
+                    <a href="#">Prev</a>
+                </li>
+                <li>
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li>
+                    <a href="#">4</a>
+                </li>
+                <li>
+                    <a href="#">5</a>
+                </li>
+                <li>
+                    <a href="#">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

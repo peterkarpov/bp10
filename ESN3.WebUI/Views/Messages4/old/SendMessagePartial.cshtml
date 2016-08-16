@@ -1,0 +1,26 @@
+﻿@model ESN.Domain.Entities.Message
+@{
+    ViewBag.Title = "SendMessage";
+    Layout = null;
+}
+
+<h2>SendMessagePartial</h2>
+
+@*<h2>from: @Model.from</h2>
+<h2>to: @Model.to</h2>*@
+
+@using (Html.BeginForm("SendMessage", "Messages4", FormMethod.Post))
+{
+
+
+    @Html.Hidden("to", Model.to)
+    @Html.Hidden("from", Model.from)
+
+    <label>Theme:</label>
+        @Html.TextBoxFor(t => t.text)
+
+
+        <button type="submit">Send</button>
+}
+
+

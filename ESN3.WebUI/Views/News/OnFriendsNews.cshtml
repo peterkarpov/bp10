@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ESN.Domain.Entities.News>
+@{
+    ViewBag.Title = "AllNews";
+    Layout = "~/Views/News/_NewsLayout.cshtml";
+}
+
+<h2>OnFriendsNews</h2>
+
+<p>Friends of @Model.First().Profile.fName</p>
+
+<p>Have @Model.Count() news</p>
+
+@Html.Partial("_NewsList", Model)

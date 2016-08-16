@@ -1,0 +1,21 @@
+﻿@model ESN3.WebUI.Models.Talk
+
+@{
+    ViewBag.Title = "OneTalk";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>OneTalk</h2>
+
+<h2>elder message(@Model.Messages.Count()):</h2>
+
+    @foreach (var message in Model.Messages)
+    {
+        <div class="@(message.from == Model.from.ProfileId ? "alert alert-info text-left" : "alert alert-danger text-right")">
+
+
+            <p>@message.theme</p>
+            <i>@message.creationTime.ToString("F")</i>
+        </div>
+    }
+

@@ -1,0 +1,26 @@
+﻿@model ESN3.WebUI.Models.PhotobooksViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Photobook of ???</h2>
+
+<p>@(Model.Profile == null?"profile not exist":Model.Profile.fName)</p>
+<p>Have @(Model.Photobooks == null ? "0" : Model.Photobooks.Count.ToString()) photobooks</p>
+
+
+<ul class="media-list">
+    @foreach (var photobook in Model.Photobooks)
+    {
+       <li class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">@photobook.Title</h4>
+                <p>@photobook.PhotobookId</p>
+            </div>
+        </li>
+    }
+</ul>

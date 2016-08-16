@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ESN.Domain.Entities.Image>
+
+<div class="col-md-12">
+    <div class="section">
+        <div class="container-fluid">
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center">Have @ViewBag.TotalItems images</h1>
+                    </div>
+                </div>*@
+            <div class="row">
+
+                @foreach (var image in Model)
+                {
+                    <div class="col-md-4">
+                        <a>
+                            
+                            <img src="@Url.Action("GetImage", "Image", new { image.ImageId })" class="img-responsive">
+                            
+                        </a>
+                        <h3>File Name: @image.fileName</h3>
+                        <i>Date of Load: @image.DateOfLoad.ToString("F")</i>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

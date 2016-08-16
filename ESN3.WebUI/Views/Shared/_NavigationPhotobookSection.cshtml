@@ -1,0 +1,119 @@
+﻿@{ 
+    string classDefault = "";
+    string classActive = "active";
+
+}
+
+<ul class="nav nav-tabs">
+    @*<a href="#" class="btn btn-primary default active">My Photoboook</a>*@
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class=@(ViewBag.NavPhotobookSec == "" ? classActive : classDefault)>
+
+            @Html.RouteLink("My Photobooks",
+                                    new
+                                    {
+                                        Controller = "Photobook2",
+                                        Action = "OnUser",
+                                        login = User.Identity.Name.Split('|')[0]
+                                    })
+        </li>
+
+        <li class=@(ViewBag.NavPhotobookSec == "AddPhotobook" ? classActive : classDefault)>
+
+            @Html.RouteLink("Add Photobook",
+                                    new
+                                    {
+                                        Controller = "Photobook2",
+                                        Action = "AddPhotobook",
+                                        ProfileId = Guid.Parse(User.Identity.Name.Split('|')[1])
+                                    })
+        </li>
+
+        <li class=@(ViewBag.NavPhotobookSec == "OnFriends" ? classActive : classDefault)>
+
+            @Html.RouteLink("Friends",
+                                    new
+                                    {
+                                        Controller = "Photobook2",
+                                        Action = "OnFriends",
+                                        login = User.Identity.Name.Split('|')[0]
+                                    })
+        </li>
+    }
+    <li class=@(ViewBag.NavPhotobookSec == "All" ? classActive : classDefault)>
+
+        @Html.RouteLink("All",
+                                    new
+                                    {
+                                        Controller = "Photobook2",
+                                        Action = "All"
+                                    })
+    </li>
+    
+    @*@Html.RouteLink("Search", new { Controller = "Photobook2", Action = "OnUser", login = User.Identity.Name }, new { @class = @ViewBag.NavProfileSec == "MyPhotobook" ? "btn btn-primary active" : "btn btn-default" })*@
+    <li class=@(ViewBag.NavPhotobookSec == "Index" ? classActive : classDefault)>
+        @Html.RouteLink("Index",
+                                    new
+                                    {
+                                        Controller = "Photobook2",
+                                        Action = "Index",
+                                        login = User.Identity.Name.Split('|')[0]
+                                    })
+    </li>
+</ul>
+
+
+@*<ul class="nav nav-tabs">
+    <li class="active">
+    <a href="#">Home</a>
+    </li>
+    <li>
+        <a href="#">Profile</a>
+    </li>
+    <li>
+        <a href="#">Messages</a>
+    </li>
+</ul>*@
+
+@*<div class="btn-group">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.RouteLink("My Photobooks",
+                        new
+                        {
+                            Controller = "Photobook2",
+                            Action = "OnUser",
+                            login = User.Identity.Name
+                        },
+                        new { @class = @ViewBag.NavPhotobookSec == "" ? "btn btn-primary active" : "btn btn-default" })
+    }
+    @Html.RouteLink("All",
+    new
+    {
+        Controller = "Photobook2",
+        Action = "All"
+    },
+    new { @class = @ViewBag.NavPhotobookSec == "All" ? "btn btn-primary active" : "btn btn-default" })
+
+    @Html.RouteLink("Friends",
+    new
+    {
+        Controller = "Photobook2",
+        Action = "OnFriends",
+        login = User.Identity.Name
+    },
+    new { @class = @ViewBag.NavPhotobookSec == "OnFriends" ? "btn btn-primary active" : "btn btn-default" })
+
+    @Html.RouteLink("Index",
+    new
+    {
+        Controller = "Photobook2",
+        Action = "Index",
+        login = User.Identity.Name
+    },
+    new { @class = @ViewBag.NavPhotobookSec == "Index" ? "btn btn-primary active" : "btn btn-default" })
+
+</div>*@

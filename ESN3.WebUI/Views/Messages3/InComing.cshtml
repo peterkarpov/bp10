@@ -1,0 +1,33 @@
+﻿@model ESN3.WebUI.Models.Messages3ViewModel
+@{
+    ViewBag.Title = "IncComing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>IncComing</h2>
+
+<p>Talks of Profile: @Model.Profile.fName</p>
+<p>You have @Model.Talks.Count() talk(s)</p>
+
+@foreach (var talk in Model.Talks)
+{
+    <h2>to to: @talk.to.fName</h2>
+    <h2>from from: @talk.from.fName</h2>
+    <h3>Contains @talk.Messages.Count() message(s)</h3>
+    <i>Time of last message: @talk.Messages.Last().creationTime.ToString("F")</i>
+    <p>@talk.Messages.Last().theme</p>
+
+    @Html.ActionLink("Send", "SendMessage",
+                        new
+                        {
+                            stringToProfileId = talk.to.ProfileId.ToString(),
+                            stringProfileId = talk.from.ProfileId.ToString()
+                        })
+
+    @Html.ActionLink("Open", "OneTalk",
+                        new
+                        {
+                            ToProfileId = talk.to.ProfileId,
+                            ProfileId = talk.from.ProfileId
+                        })
+}

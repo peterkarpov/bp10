@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ESN.Domain.Entities.Image>
+
+<p>Have @ViewBag.TotalItems images</p>
+
+<ul class="media-list">
+    @foreach (var image in Model)
+    {
+        <li class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="@Url.Action("GetImage", "Image", new { image.ImageId })" height="64" width="64">
+            </a>
+
+            <div class="media-body">
+                @*<h4 class="media-heading">File Name: @image.fileName</h4>*@
+                <h4 class="media-heading">@Html.LabelFor(i=>i.First().fileName) : @image.fileName</h4>
+                <i>Date of Load: @image.DateOfLoad.ToString("F")</i>
+            </div>
+
+
+        </li>
+    }
+</ul>

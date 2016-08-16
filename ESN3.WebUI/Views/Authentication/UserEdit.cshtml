@@ -1,0 +1,39 @@
+﻿@model ESN3.WebUI.Models.RegistrationViewModel
+@{
+    ViewBag.Title = "UserEdit";
+}
+
+<div class="col-md-offset-2 col-md-6">
+
+    <h2 class="text-center">UserEdit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div class="form-group">
+            <label>Login</label>
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Email address</label>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>ConfirmPassword</label>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-default center-block">
+            Save Changes
+            <br>
+        </button>
+    }
+</div>
+
+
+

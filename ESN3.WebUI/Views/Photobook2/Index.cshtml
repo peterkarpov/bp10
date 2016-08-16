@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 text-left">
+        @Html.Partial("_NavigationPhotobookSection")
+    </div>
+</div>
+
+<h2>This is Photobok2 controller, action Index</h2>
+
+@if (TempData["message-complete"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["message-complete"]</div>
+}
+
+@if (TempData["message-error"] != null)
+{
+    <div class="alert alert-danger text-center">@TempData["message-error"]</div>
+}
+
+
+

@@ -1,0 +1,47 @@
+﻿@model ESN.Domain.Entities.Image
+
+@{
+    ViewBag.Title = "AddImageOnPhotobook";
+}
+
+<div class="row">
+    <div class="col-md-12 text-left">
+        @Html.Partial("_NavigationPhotobookSection")
+    </div>
+</div>
+
+<h2>AddImageOnPhotobook</h2>
+
+<p>PhotobookId: @Model.PhotobookId</p>
+
+@using (Html.BeginForm("AddImageOnPhotobook", "Photobook2", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(p => p.PhotobookId)
+    @Html.HiddenFor(i => i.ImageId)
+    <div class="panel-body">
+        <div class="form-group">
+            <div style="position:relative;">
+                <label>Image</label>
+                <a class='btn' href='javascript:;'>
+                    chose file...
+                    <input type="file" name="uploadImage" size="40"
+                           style="position:absolute;
+                                  z-index:2;
+                                  top:0;
+                                  left:0;
+                                  filter: alpha(opacity=0);
+                                  opacity:0;
+                                  background-color:transparent;
+                                  color:transparent;"
+                           onchange='$("#upload-file-info").html($(this).val());'>
+                </a>
+                <span class='label label-info' id="upload-file-info"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel-footer">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ESN.Domain.Entities.Comment>
+
+@{
+
+}
+
+<ul class="list-group">
+
+    @foreach (var comment in Model)
+            {
+        <li class="list-group-item" style="border:none">
+
+
+            <div>
+                <a href="@(Url.RouteUrl(new
+                     {
+                         controller = "Profile",
+                         action = "ShowOne",
+                         ProfileId = comment.ProfileId
+                     }))">
+                    <b>@(comment.Profile.fName ?? "User has been deleted own profile...")</b>
+                </a>
+            </div>
+
+            <span>@comment.text</span>
+            <div><i>@comment.creationTime.ToString("d MMM HH:mm")</i></div>
+
+            <a href="@(Url.RouteUrl(new
+                                       {
+                                           controller = "Like",
+                                           action = "SetLike",
+
+                                           TargetId = comment.CommentId,
+                                           login = User.Identity.Name.Split('|')[0].ToString(),
+                                           returnUrl = Request.Url.PathAndQuery
+                                       }
+                            ))">
+                <span class="text-success pull-right">
+                    @(comment.Likes.Count().ToString())
+                </span>
+                <span class="glyphicon glyphicon-thumbs-up text-success pull-right">
+                </span>
+            </a>
+
+            <a href="@(Url.RouteUrl(new
+                                         {
+                                             controller = "Like",
+                                             action = "SetDislike",
+
+                                             TargetId = comment.CommentId,
+                                             login = User.Identity.Name.Split('|')[0].ToString(),
+                                             returnUrl = Request.Url.PathAndQuery
+                                         }))">
+                <span class="text-danger pull-right">
+                    @(Html.Action("GetDislike", "Like", new { TargetId = comment.CommentId }).ToString() ?? "0")
+                </span>
+                <span class="glyphicon glyphicon-thumbs-down text-danger pull-right">
+                    @*@(Html.Action("GetDislike", "Like", new { TargetId = news.NewsId }).ToString() ?? "0")*@
+                </span>
+                <br>
+            </a>
+
+        </li>
+    }
+
+</ul>
+

@@ -1,0 +1,20 @@
+﻿@using ESN.WebUI.Models
+@using ESN.WebUI.HtmlHelpers
+@model ProfilesListViewModel
+
+@{
+    ViewBag.Title = "Товары";
+}
+
+@foreach (var p in @Model.Profiles)
+{
+    <div>
+        <h3>@p.fName</h3>
+        <p>@p.dob.ToString()</p>
+        <h4>@p.userId</h4>
+    </div>
+}
+
+<div>
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>

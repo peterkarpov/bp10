@@ -1,0 +1,185 @@
+﻿@model IEnumerable<ESN.Domain.Entities.News>
+
+@*<ul style="border:2px solid black">
+        @foreach (var news in Model)
+        {
+            <li style="margin:10px; border:1px solid black">
+                <h3>Autor: @news.Profile.fName</h3>
+                <i>@news.creationTime.ToString("F")</i>
+                <p>@news.theme</p>
+                <p>NewsId: @news.NewsId</p>
+                @Html.ActionLink("show one news", "ShowOneNews", new { NewsId = news.NewsId, returnUrl = Request.Url.PathAndQuery })
+                @Html.ActionLink("delete this news", "DeleteNews", new { NewsId = news.NewsId, returnUrl = Request.Url.PathAndQuery })
+
+                @Html.ActionLink("Likes: " + news.Likes.Count().ToString() ?? "0", "SetLike", new { NewsId = news.NewsId, login = User.Identity.Name.Split('|')[0].ToString(), returnUrl = Request.Url.PathAndQuery })
+                @Html.ActionLink("Dislikes: " + Html.Action("GetDislike", new { TargetId = news.NewsId }).ToString() ?? "0", "SetDislike", new { TargetId = news.NewsId, login = User.Identity.Name.Split('|')[0].ToString(), returnUrl = Request.Url.PathAndQuery })
+
+            </li>
+        }
+    </ul>*@
+<div class="row">
+    <div class="col-md-8 col-md-offset-1">
+
+        @foreach (var news in Model)
+        {
+
+            <ul class="media-list">
+
+                <li class="media">
+                    <a class="pull-left" href="@(Url.RouteUrl(new
+                                           {
+                                               controller = "Profile",
+                                               action = "ShowOne",
+                                               ProfileId = news.ProfileId
+                                           }))">
+                        <img class="media-object" src="@Url.Action("GetImage", "Image", new { ImageId = news.Profile.AvatarImageId })" height="64" width="64">
+
+                    </a>
+
+                    <div class="media-body">
+
+                        <a href="@(Url.RouteUrl(new
+                             {
+                                 controller = "Profile",
+                                 action = "ShowOne",
+                                 ProfileId = news.ProfileId
+                             }))">
+
+                            <h4 class="media-heading">@news.Profile.fName</h4>
+                        </a>
+
+
+
+                        <p>
+                            @news.theme
+                        </p>
+                        <i>@news.creationTime.ToString("d MMM HH:mm")</i>
+
+                        <!-- Split button -->
+                        @*<div class="btn-group pull-left">
+                                <button type="button" class="btn btn-xs btn-default">Open</button>
+                                <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Меню с переключением</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        @Html.RouteLink("show one news", new { controller = "News", action = "ShowOneNews", NewsId = news.NewsId, returnUrl = Request.Url.PathAndQuery })
+                                    </li>
+                                    <li>
+                                        @if ((User.Identity.IsAuthenticated ? User.Identity.Name.Split('|')[1] : null) == news.ProfileId.ToString())
+                                    {
+                                        @Html.ActionLink("delete this news", "DeleteNews", new { NewsId = news.NewsId, returnUrl = Request.Url.PathAndQuery })
+                                    }
+                                </li>
+                            </ul>
+                            </div>*@
+                        <span>|</span>
+
+                        @Html.RouteLink("open", new { controller = "News", action = "ShowOneNews", NewsId = news.NewsId, returnUrl = Request.Url.PathAndQuery })
+
+                        @if ((User.Identity.IsAuthenticated ? User.Identity.Name.Split('|')[1] : null) == news.ProfileId.ToString())
+                        {
+                            <span>|</span>
+                            @Html.ActionLink("delete", "DeleteNews", new { NewsId = news.NewsId, returnUrl = Request.Url.PathAndQuery })
+                        }
+
+                        @*@Html.RouteLink("Likes: " + news.Likes.Count().ToString() ?? "0",
+                                    new
+                                    {
+                                        controller = "Like",
+                                        action = "SetDislike",
+
+                                        NewsId = news.NewsId,
+                                        login = User.Identity.Name.Split('|')[0].ToString(),
+                                        returnUrl = Request.Url.PathAndQuery
+                                    })
+
+                            @Html.RouteLink("Dislikes: " + Html.Action("GetDislike", "Like", new { TargetId = news.NewsId }).ToString() ?? "0",
+                                    new
+                                    {
+                                        controller = "Like",
+                                        action = "SetDislike",
+
+                                        TargetId = news.NewsId,
+                                        login = User.Identity.Name.Split('|')[0].ToString(),
+                                        returnUrl = Request.Url.PathAndQuery
+                                    },
+                                    new { @class = "" })*@
+
+
+                        <a href="@(Url.RouteUrl(new
+                                                    {
+                                                        controller = "Like",
+                                                        action = "SetLike",
+
+                                                        TargetId = news.NewsId,
+                                                        login = User.Identity.Name.Split('|')[0].ToString(),
+                                                        returnUrl = Request.Url.PathAndQuery
+                                                    }
+                            ))">
+                            <span class="text-success pull-right">
+                                @(news.Likes.Count().ToString())
+                            </span>
+                            <span class="glyphicon glyphicon-thumbs-up text-success pull-right">
+                                @*@(news.Likes.Count().ToString())*@
+                            </span>
+                        </a>
+
+
+
+                        <a href="@(Url.RouteUrl(new
+                             {
+                                 controller = "Like",
+                                 action = "SetDislike",
+
+                                 TargetId = news.NewsId,
+                                 login = User.Identity.Name.Split('|')[0].ToString(),
+                                 returnUrl = Request.Url.PathAndQuery
+                             }))">
+                            <span class="text-danger pull-right">
+                                @(Html.Action("GetDislike", "Like", new { TargetId = news.NewsId }).ToString() ?? "0")
+                            </span>
+                            <span class="glyphicon glyphicon-thumbs-down text-danger pull-right">
+                                @*@(Html.Action("GetDislike", "Like", new { TargetId = news.NewsId }).ToString() ?? "0")*@
+                            </span>
+                        </a>
+
+                        @Html.Action("AddComment", "Comments", new { TargetId = news.NewsId, returnUrl = Request.Url.PathAndQuery })
+
+
+
+                        <div id="@news.NewsId.ToString()">
+
+
+                            @if (news.Comments.Count() > 3)
+                            {
+                                <div class="ajaxLink">
+
+                                    @Ajax.ActionLink("See All Comments", "CommentsOnTarget", "Comments",
+                                         new { TargetId = news.NewsId },
+                                         new AjaxOptions
+                                         {
+                                             UpdateTargetId = news.NewsId.ToString(),
+
+                                             Url = Url.Action("CommentsOnTarget", "Comments", new { TargetId = news.NewsId }),
+
+                                         },
+                                         new { @class = "btn btn-block btn-link" })
+                                </div>
+                            }
+
+                            @Html.Action("CommentsOnTarget", "Comments", new { TargetId = news.NewsId, commentsCount = 3 })
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+        }
+
+
+
+
+    </div>
+
+</div>

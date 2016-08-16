@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ESN.Domain.Entities.Photobook>
+
+<ul class="media-list">
+    @foreach (var photobook in Model)
+    {
+        <li class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="@Url.Action("GetImage", "Image", new { ImageId = (photobook.Images.Count() > 0) ? photobook.Images.First().ImageId : default(Guid) })" height="64" width="64">
+            </a>
+
+            <div class="media-body">
+                <h4 class="media-heading">Photobook Title: @photobook.Title</h4>
+                @*<p>PhotobookId: @photobook.PhotobookId</p>*@
+                <p>This photobook have @photobook.Images.Count() image(s)</p>
+                <p>Autor this photobook @photobook.Profile.fName</p>
+            </div>
+
+            @Html.ActionLink("show with action link", "OnePhotobook", new { PhotobookId = photobook.PhotobookId })
+            <span>|</span>
+            @Html.ActionLink("Add Image On Photobook", "AddImageOnPhotobook", new { PhotobookId = photobook.PhotobookId })
+        </li>
+    }
+</ul>
+

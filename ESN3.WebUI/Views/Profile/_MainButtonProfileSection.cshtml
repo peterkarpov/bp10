@@ -1,0 +1,134 @@
+﻿@model ESN3.WebUI.Models.ProfileViewModel
+@{
+    string classDefault = "btn btn-block btn-primary";
+    string classDisabled = "btn btn-block btn-primary disabled";
+
+}
+@*<a class="btn btn-block btn-primary disabled">Add to Friends</a>*@
+
+@if ((string)ViewBag.FriendStatus == "your profile")
+{
+    @Html.ActionLink("change Avatar", "PhotobooksForAvatar",
+                    new
+                    {
+                        ProfileId = Model.Profile.ProfileId
+                    },
+                    new
+                    {
+                        @class = "btn btn-block btn-default"
+                    })
+    <br />
+}
+
+<div class="alert alert-success text-center">@ViewBag.FriendStatus.ToString()</div>
+
+@switch ((string)ViewBag.FriendStatus)
+{
+    case "none":
+    case "your subscriber":
+        @Html.RouteLink("Add to Friends",
+                  new
+                  {
+                      Controller = "FriendsList",
+                      Action = "AddToFriends",
+                      ProfileId = User.Identity.Name.Split('|')[1],
+                      subscriberId = Model.Profile.ProfileId
+                  },
+                  new
+                  {
+                      @class = classDefault
+                  })
+
+        @Html.RouteLink("Send Message",
+                  new
+                  {
+                      Controller = "Messages4",
+                      Action = "SendMessage",
+                      fromProfileId = User.Identity.Name.Split('|')[1],
+                      toProfileId = Model.Profile.ProfileId
+                  },
+                  new
+                  {
+                      @class = classDefault
+                  })
+        break;
+
+    case "your profile":
+        break;
+
+    case "your best friends":
+    case "your friend":
+        @Html.RouteLink("delToFriends",
+                  new
+                  {
+                      Controller = "FriendsList",
+                      Action = "delToFriends",
+                      ProfileId = User.Identity.Name.Split('|')[1],
+                      subscriberId = Model.Profile.ProfileId
+                  },
+                  new
+                  {
+                      @class = classDefault
+                  })
+
+        @Html.RouteLink("Send Message",
+                  new
+                  {
+                      Controller = "Messages4",
+                      Action = "SendMessage",
+                      fromProfileId = User.Identity.Name.Split('|')[1],
+                      toProfileId = Model.Profile.ProfileId
+                  },
+                  new
+                  {
+                      @class = classDefault
+                  })
+        break;
+
+    case "no identity":
+
+
+
+        break;
+
+    default:
+        break;
+}
+
+@*@Html.RouteLink("setToFriends",
+                  new
+                  {
+                      Controller = "FriendsList",
+                      Action = "setToFriends",
+                      ProfileId = User.Identity.Name.Split('|')[1],
+                      subscriberId = Model.User.UserId
+                  },
+                  new
+                  {
+                      @class = classDefault
+                  })*@
+
+@Html.RouteLink("Show Photobook2",
+                  new
+                  {
+                      Controller = "Photobook2",
+                      Action = "OnUser",
+                      UserIdString = Model.Profile.ProfileId.ToString()
+                      
+                  },
+                  new
+                  {
+                      @class = classDefault
+                  })
+
+@Html.RouteLink("Show News",
+                  new
+                  {
+                      Controller = "News",
+                      Action = "OnUserNews",
+                      ProfileId = Model.Profile.ProfileId
+                  },
+                  new
+                  {
+                      @class = classDefault
+                  })

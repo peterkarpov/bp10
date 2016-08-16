@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    Guid TargetId = default(Guid);
+
+
+}
+
+<h2>Index</h2>
+
+    @Html.Action("AddComment", "Comments", new { TargetId = TargetId })
+
+    @Html.Action("CommentsOnTarget", "Comments", new { TargetId = TargetId })

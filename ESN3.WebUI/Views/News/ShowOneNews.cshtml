@@ -1,0 +1,30 @@
+﻿@model ESN.Domain.Entities.News
+
+@{
+    ViewBag.Title = "ShowOneNews";
+    Layout = "~/Views/News/_NewsLayout.cshtml";
+}
+
+@if (User.Identity.Name.Split('|')[1] == Model.ProfileId.ToString())
+{
+    @Html.RouteLink("Delete this News",
+    new
+    {
+        controller = "News",
+        action = "DeleteNews",
+
+        NewsId = Model.NewsId,
+        returnUrl = Request.Url.PathAndQuery,
+    }, new
+    {
+        @class = "btn btn-danger pull-right",
+        @style = "margin-top:10px"
+    })
+
+
+}
+
+<h2>ShowOneNews</h2>
+
+@Html.Partial("~/Views/News/_NewsList.cshtml", new List<ESN.Domain.Entities.News>() { Model })
+      

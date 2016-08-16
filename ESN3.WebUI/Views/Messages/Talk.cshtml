@@ -1,0 +1,61 @@
+﻿@model ESN3.WebUI.Models.Talk
+@{
+    ViewBag.Title = "Talk";
+}
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Messages @(Model.from.fName) to @(Model.to.fName)</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            @foreach (var item in Model.Messages)
+            {
+
+
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">@item.creationTime</h4>
+                        <p>
+                            Текст сообщения @item.MessageId
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            }
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <ul class="pagination">
+                <li>
+                    <a href="#">Prev</a>
+                </li>
+                <li>
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li>
+                    <a href="#">4</a>
+                </li>
+                <li>
+                    <a href="#">5</a>
+                </li>
+                <li>
+                    <a href="#">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

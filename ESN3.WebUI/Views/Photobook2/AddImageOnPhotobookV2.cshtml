@@ -1,0 +1,35 @@
+﻿@model ESN.Domain.Entities.Image
+@{
+    ViewBag.Title = "AddImageOnPhotobookV2";
+}
+<h2>AddImageOnPhotobookV2</h2>
+
+@using (Html.BeginForm("AddImageOnPhotobookV2", "Photobook2", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+        <div class="editor-field">
+            @Html.HiddenFor(p => p.PhotobookId)
+            @Html.HiddenFor(i => i.ImageId)
+            @*@Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)*@
+        </div>
+
+        <div class="editor-field">
+            <input type="file" name="uploadImage" multiple accept="image/*"/>
+        </div>
+
+        <p>
+            <input type="submit" value="Add" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("return", "Index")
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

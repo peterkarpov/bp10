@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ESN.Domain.Entities.Photobook>
+@{ 
+    ViewBag.ProfileId = Model.First().ProfileId;
+}
+
+<!-- Single button -->
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Photobook <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+        @foreach (var photobook in Model)
+        {
+            <li>
+                @*<div class="ajaxLink">*@
+                    @Ajax.ActionLink(String.Format(photobook.Title + " (" + photobook.Images.Count() + ")"), "ImagesForAvatar", "Profile",
+                    new { PhotobookId = photobook.PhotobookId },
+                    new AjaxOptions
+                    {
+                        Url = Url.Action("ImagesForAvatar", new { PhotobookId = photobook.PhotobookId }),
+                        UpdateTargetId = "ImagesForAvatar",
+                    })
+                @*</div>*@
+            </li>
+        }
+    </ul>
+</div>
+
+<h2>Click on Image for Set your Avatar</h2>
+
+
+
+
+<div id="ImagesForAvatar">
+
+    @Html.Action("ImagesForAvatar", "Profile", new { PhotobookId = Model.First().PhotobookId }) 
+
+</div>
+
+
+
