@@ -140,6 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\camera_200.png" />
+    <Content Include="App_Data\ESN3.mdf" />
+    <Content Include="App_Data\ESN3_log.ldf">
+      <DependentUpon>ESN3.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
